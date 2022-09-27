@@ -56,9 +56,7 @@ const addCarrito = (e) => {
 
 /* btnsButtons.forEach(btn =>{
     btn.addEventListener('click',addCarrito)
-    
-
-}) */
+    }) */
 
 const pintarCarrito = () =>{
 
@@ -66,6 +64,7 @@ const pintarCarrito = () =>{
 
     /* Object.values(carritoObjeto) */carritoObjeto.forEach((item) => {
         const clone = template.content.cloneNode(true)
+
         clone.querySelector(".text-white .lead").textContent = item.titulo
         clone.querySelector(".badge").textContent = item.cantidad
         clone.querySelector("div span").textContent = item.precio * item.cantidad
@@ -78,6 +77,7 @@ const pintarCarrito = () =>{
 
     carrito.appendChild(fragment)
 
+    pintarFooter()
 }
 
 
@@ -108,6 +108,19 @@ lista.appendChild(fragment) */
 
     fragment.appendChild(li)
 }); */
+
+const pintarFooter = (e) =>{
+    //console.log("pintar footer")
+    footer.textContent = ""
+
+    const total = carritoObjeto.reduce((acc, current) => acc + current.cantidad * current.precio, 0)
+    const clone = templateFooter.content.cloneNode(true)
+    clone.querySelector("span").textContent = total
+    footer.appendChild(clone)
+
+    
+    console.log(total)
+    }
 
 const aumentarPre = e =>{
     carritoObjeto = carritoObjeto.map(item => {
